@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neighbourhood Map</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+    <aside class="side-menu">
+      <header class="header">
+        <h3>Jamaica Tourist Attractions</h3>
+        <i class="fa fa-bars"></i>
+      </header>
+      <div class="search">
+        <input type="text" id="search" name="search" placeholder="Search">
+        <div class="submit" data-bind="click: searchFilter"><i class="fa fa-filter"></i>&nbsp;Filter</div>
+      </div>
+      <div class="listings">
+        <ul data-bind="foreach: filter">
+				  <li data-bind="text: $data, click: $parent.showMarker"></li>
+        </ul>
+      </div>
+    </aside>
+    <div id="map"></div>
+<body>
+    <script src="https://unpkg.com/sweetalert2@7.0.7/dist/sweetalert2.all.js"></script>
+    <script src='knockout-3.4.2.js'></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmfuAGV8T5PJxlopMoeem0je4RY1x4FvM&callback=initMap">
+    </script>
+</body>
+</html>
