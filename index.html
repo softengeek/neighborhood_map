@@ -13,7 +13,7 @@
         <i class="fa fa-bars"></i>
       </header>
       <div class="search">
-        <input type="text" id="search" name="search" placeholder="Search">
+        <input type="text" id="search" name="search" data-bind="textInput: term, valueUpdate: 'afterkeydown'" placeholder="Search">
         <div class="submit" data-bind="click: searchFilter"><i class="fa fa-filter"></i>&nbsp;Filter</div>
       </div>
       <div class="listings">
@@ -29,7 +29,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="index.js"></script>
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmfuAGV8T5PJxlopMoeem0je4RY1x4FvM&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmfuAGV8T5PJxlopMoeem0je4RY1x4FvM&callback=initMap" onerror="mapError()">
     </script>
 </body>
 </html>

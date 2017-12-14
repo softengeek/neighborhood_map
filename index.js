@@ -125,7 +125,9 @@ const ViewModel = function() {
        }).done(function(data) {
          const response = data.response.venues[0]
          this.address = ko.computed(function() {
-           return `${response.location.formattedAddress[0]}, ${response.location.formattedAddress[1]}`;
+           const address1 = response.location.formattedAddress[0] || "";
+           const address2 = response.location.formattedAddress[1] || "No Address Found";
+           return `${address1}, ${address2}`;
          }, self);
       	 type = response.categories[0].name;
          checkins = response.stats.checkinsCount;
@@ -169,18 +171,17 @@ const ViewModel = function() {
   }
 
   //Used to filter the items based on the search term
-  this.searchFilter =  function() {
-    const val = $('#search').val();
-    self.term(val);
-    var filterElements = $('.listings li:visible');
-    var filterTerms = []
-    for (const filter of filterElements) {
-      filterTerms.push($(filter).text());
-    }
+  this.searchFilter = ko.computed(function() {
+    var searchTerm = self.term().toLowerCase();
 
-    showListings(filterTerms);
-    HideListings(filterTerms);
-  };
+    if (!searchTerm) {
+        return null;
+    } else {
+        showListings(self.filter());
+        HideListings(self.filter());
+        return 0;
+    }
+  });
 
 }
 
@@ -199,4 +200,9 @@ function initMap() {
       $('.side-menu').toggleClass('menu-show');
       $('.search').toggleClass('hide');
     })
+}
+
+//Error function to deal with
+mapError = function() {
+  swal('Error','Google Maps Has Failed to Load! Please try again later.', 'error');
 }
